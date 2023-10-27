@@ -1,5 +1,5 @@
 export const ImageGallery = ({ children }) => (
-    <ul class="gallery">
+    <ul className="gallery">
         {children}
     </ul>
 )
