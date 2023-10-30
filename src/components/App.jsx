@@ -11,35 +11,43 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.getData()
+    this.fetchCats()
   }
 
 
   fetchCats = () => {
     const API_KEY = '38312526-d0ea4ba6d4ac142df4a72a2b0'
     const URL = "https://pixabay.com/api/?q=cat&page=1&key=" + API_KEY + "&image_type=photo&orientation=horizontal&per_page=12"
-    try {
-      const data = await fetch(URL);
-      this.setState({ data });
-    } catch (error) {
-      this.setState({ error });
-    }
+    fetch(URL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json()
+      })
+      .then((data) => {
+        let list = data.hits
+        this.setState({
+          data: list,
+        })
+      }
+      )
+      .catch((error) => console.log(error))
   }
-}
 
 
-render() {
+  render() {
 
-  return (
-    <>
-      <Searchbar></Searchbar>
-      <ImageGallery>
-        <ImageGalleryItem />
-      </ImageGallery>
+    return (
+      <>
+        <Searchbar></Searchbar>
+        <ImageGallery>
+          <ImageGalleryItem />
+        </ImageGallery>
 
-    </>
-  )
+      </>
+    )
 
-}
+  }
 
 };
