@@ -1,10 +1,12 @@
-export const Searchbar = ({ onSubmit }) => (
+export const Searchbar = ({ onSubmit, value, onChange, }) => (
     <header className="searchbar">
-        <form className="form" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="form" >
             <button type="submit" className="button">
                 <span className="button-label">Search</span>
             </button>
             <input
+                onChange={onChange}
+                value={value}
                 className="input"
                 type="text"
                 autoComplete="off"
