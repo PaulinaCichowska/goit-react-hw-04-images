@@ -4,7 +4,9 @@ export const Searchbar = ({ onSubmit, value, onChange, }) => (
             <button type="submit" className="button">
                 <span className="button-label">Search</span>
             </button>
+
             <input
+                name="search"
                 onChange={onChange}
                 value={value}
                 className="input"
