@@ -1,6 +1,6 @@
-export const Button = ({ prev, next }) => (
+export const Button = ({ loadMore, }) => (
     <>
-        <button onClick={prev}>prev</button>
-        <button onClick={next}>next</button>
+        <button onClick={loadMore}>prev</button>
+
     </>
 )
