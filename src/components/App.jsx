@@ -33,6 +33,7 @@ export class App extends Component {
     const form = e.currentTarget;
     const search = e.target.search.value
     e.preventDefault();
+
     this.setState({
       term: search,
     })
