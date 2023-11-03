@@ -14,8 +14,15 @@
 }
 
 .list {
-    width: 100%;
+    width: calc(100vw * (2 / 3));
     height: 100%;
     z-index: 1;
     box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list:after {
+    content: '';
 }

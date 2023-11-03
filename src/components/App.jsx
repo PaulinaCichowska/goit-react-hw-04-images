@@ -4,7 +4,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
 import { Button } from "./Button/Button";
 import { Modal } from "./Modal/Modal"
-
+import { Dna } from "react-loader-spinner";
 
 export class App extends Component {
   state = {
@@ -87,17 +87,33 @@ export class App extends Component {
 
     return (
       <>
+
+
         <Searchbar onSubmit={this.onFormSubmit}  ></Searchbar>
-        <div>
-          <ImageGallery>
-            <ImageGalleryItem obj={this.filteredImg()} />
-          </ImageGallery>
-          <Modal obj={this.filteredImg()} />
-        </div>
-        <Button loadMore={this.loadMore} >{this.state.isLoading ? 'Loading...' : 'Load More'}</Button>
+        <ImageGallery>
+          <ImageGalleryItem obj={this.filteredImg()} />
+        </ImageGallery>
+        <Modal obj={this.filteredImg()} />
+        {this.state.isLoading ? (
+          <Dna
+            height="200"
+            width="300"
+            ariaLabel="loading" />)
+          :
+          (
+            <Button loadMore={this.loadMore} >load more</Button>
+          )
+        }
+
       </>
     )
 
   }
 
 };
+{/* <Button loadMore={this.loadMore} >{this.state.isLoading ?
+  <Dna
+    height="200"
+    width="300"
+    ariaLabel="loading"
+  /> : 'Load More'}</Button> */}
