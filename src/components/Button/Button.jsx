@@ -1,6 +1,7 @@
-export const Button = ({ loadMore, }) => (
+import css from './Button.module.css'
+export const Button = ({ loadMore, children }) => (
     <>
-        <button onClick={loadMore}>prev</button>
+        <button className={css.button} onClick={loadMore}>{children}</button>
 
     </>
 )

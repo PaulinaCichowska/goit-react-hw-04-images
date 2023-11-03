@@ -13,44 +13,12 @@ export class App extends Component {
     term: "",
     isLoading: false,
   }
-  // onInputChange = (e) => {
-  //   this.setState({
-  //     term: e.target.value,
-  //   })
-  // }
-  // next = () => {
-  //   this.setState((p) => ({
-  //     page: p.page + 1,
-  //   }));
-  // };
-  // prev = () => {
-  //   this.setState((p) => ({
-  //     page: p.page - 1,
-  //   }));
-  // };
-
-  onFormSubmit = (e) => {
-    const form = e.currentTarget;
-    const search = e.target.search.value
-    e.preventDefault();
-
-    this.setState({
-      term: search,
-    })
-    form.reset();
-
-  }
-
-  filteredImg() {
-    return this.state.data.filter(img => img.tags.toLowerCase().indexOf(this.state.term) !== -1)
-  }
 
 
   componentDidMount() {
     this.fetchCats()
     this.setState({ isLoading: true });
   }
-
 
   fetchCats = async () => {
     this.setState({
@@ -80,6 +48,26 @@ export class App extends Component {
   }
 
 
+  onFormSubmit = (e) => {
+    const form = e.currentTarget;
+    const search = e.target.search.value
+    e.preventDefault();
+
+    this.setState({
+      term: search,
+    })
+    form.reset();
+
+  }
+
+
+
+  filteredImg() {
+    return this.state.data.filter(img => img.tags.toLowerCase().indexOf(this.state.term) !== -1)
+  }
+
+
+
   loadMore = () => {
     this.setState((prevState) => {
       return {
@@ -106,9 +94,7 @@ export class App extends Component {
           </ImageGallery>
           <Modal obj={this.filteredImg()} />
         </div>
-        <Button loadMore={this.loadMore} ></Button>
-        {this.state.isLoading ? 'Loading...' : 'Load More'}
-
+        <Button loadMore={this.loadMore} >{this.state.isLoading ? 'Loading...' : 'Load More'}</Button>
       </>
     )
 
