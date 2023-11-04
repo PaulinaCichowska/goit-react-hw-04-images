@@ -13,7 +13,7 @@ export class App extends Component {
     term: "",
     isLoading: false,
   }
-
+  // ??
 
   componentDidMount() {
     this.fetchCats()
