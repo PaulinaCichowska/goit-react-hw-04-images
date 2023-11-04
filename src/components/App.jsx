@@ -111,9 +111,3 @@ export class App extends Component {
   }
 
 };
-{/* <Button loadMore={this.loadMore} >{this.state.isLoading ?
-  <Dna
-    height="200"
-    width="300"
-    ariaLabel="loading"
-  /> : 'Load More'}</Button> */}
