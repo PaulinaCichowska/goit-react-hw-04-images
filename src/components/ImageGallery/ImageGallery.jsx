@@ -1,4 +1,6 @@
 import css from './ImageGallery.module.css'
+import PropTypes from 'prop-types';
+
 export const ImageGallery = ({ children }) => (
     <div className={css.container}>
         <div className={css.top}>
@@ -8,3 +10,6 @@ export const ImageGallery = ({ children }) => (
         </div>
     </div>
 )
+ImageGallery.propTypes = {
+    children: PropTypes.node,
+}

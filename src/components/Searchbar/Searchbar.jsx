@@ -1,4 +1,6 @@
 import css from "./Searchbar.module.css"
+import PropTypes from 'prop-types';
+
 export const Searchbar = ({ onSubmit, value, onChange, }) => (
     <header className={css.searchbar}>
         <form onSubmit={onSubmit} className={css.form} >
@@ -21,3 +23,9 @@ export const Searchbar = ({ onSubmit, value, onChange, }) => (
     </header>
 
 )
+
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func,
+    value: PropTypes.string,
+    onChange: PropTypes.object,
+}

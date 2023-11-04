@@ -1,4 +1,8 @@
 import css from './ImageGalleryItem.module.css'
+
+import PropTypes from 'prop-types';
+
+
 export const ImageGalleryItem = ({ obj }) => (
     <>
         {
@@ -14,3 +18,6 @@ export const ImageGalleryItem = ({ obj }) => (
             })}
     </>
 )
+ImageGalleryItem.propTypes = {
+    obj: PropTypes.array,
+}
