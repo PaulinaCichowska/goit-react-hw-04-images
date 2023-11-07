@@ -13,20 +13,19 @@ export class App extends Component {
     term: "",
     isLoading: false,
   }
-  // ??
 
   componentDidMount() {
-    this.fetchCats()
+    this.fetchData()
     this.setState({ isLoading: true });
   }
 
-  fetchCats = async () => {
+  fetchData = async (search) => {
     this.setState({
       isLoading: true,
     })
     const { page } = this.state
     const API_KEY = '38312526-d0ea4ba6d4ac142df4a72a2b0'
-    const URL = `https://pixabay.com/api/?q=cat&page=${page}&key=` + API_KEY + "&image_type=photo&orientation=horizontal&per_page=12"
+    const URL = `https://pixabay.com/api/?q=${search || this.state.term}&page=${page}&key=` + API_KEY + "&image_type=photo&orientation=horizontal&per_page=12"
     await fetch(URL)
       .then((response) => {
         if (!response.ok) {
@@ -36,10 +35,18 @@ export class App extends Component {
       })
       .then((data) => {
         let list = data.hits
-        this.setState((p) => ({
-          data: [...p.data, ...list],
-          isLoading: false
-        }))
+        if (search !== this.state.term) {
+          this.setState((p) => ({
+            data: [...p.data, ...list],
+            isLoading: false
+          }))
+        } else {
+
+          this.setState((p) => ({
+            data: [...list],
+            isLoading: false
+          }))
+        }
       }
       )
       .catch((error) => console.log(error))
@@ -52,10 +59,13 @@ export class App extends Component {
     const form = e.currentTarget;
     const search = e.target.search.value
     e.preventDefault();
+    if (search !== this.state.term) {
+      this.setState({
+        term: search,
+      })
+      this.fetchData(search)
 
-    this.setState({
-      term: search,
-    })
+    }
     form.reset();
 
   }
@@ -78,7 +88,7 @@ export class App extends Component {
 
   async componentDidUpdate(prevProps, prevState) {
     if (prevState.page !== this.state.page) {
-      this.fetchCats();
+      this.fetchData();
     }
   }
 
@@ -111,9 +121,3 @@ export class App extends Component {
   }
 
 };
-{/* <Button loadMore={this.loadMore} >{this.state.isLoading ?
-  <Dna
-    height="200"
-    width="300"
-    ariaLabel="loading"
-  /> : 'Load More'}</Button> */}
