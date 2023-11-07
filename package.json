@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://paulinacichowska.github.io/goit-react-hw-03-image-finder/",
   "dependencies": {
+
     "components": "^0.1.0",
     "eslint-config-react-app": "^7.0.1",
     "react": "^18.1.0",
