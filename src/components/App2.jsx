@@ -15,6 +15,7 @@ export const App2 = () => {
     const [isLoading, setIsLoading] = useState(false);
 
 
+
     const fetchData = async (search) => {
         setIsLoading(true)
         const API_KEY = '38312526-d0ea4ba6d4ac142df4a72a2b0'
@@ -22,14 +23,16 @@ export const App2 = () => {
         try {
             const response = await fetch(URL);
             const json = await response.json();
-            const newData = json.hits
-            setData(json.hits);
-
-            if (search !== term) {
+            let newData = json.hits
+            // console.log(String(search).valueOf() === String(term).valueOf())
+            console.log((search === term))
+            if (search === term) {
                 setData([...data, ...newData])
+                console.log("1")
 
             } else {
                 setData([...newData])
+                console.log("2")
 
             }
 
@@ -45,7 +48,7 @@ export const App2 = () => {
 
 
     useEffect(() => {
-        fetchData();
+        fetchData(term);
 
         setIsLoading(true)
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,7 +57,7 @@ export const App2 = () => {
     useEffect(() => {
         const prev = page - 1;
         if (prev !== page) {
-            fetchData();
+            fetchData(term);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
@@ -63,24 +66,27 @@ export const App2 = () => {
         const form = e.currentTarget;
         const search = e.target.search.value
         e.preventDefault();
-
-        setTerm(search)
-        fetchData(search)
-
         form.reset();
+        if (term !== search && search !== "") {
+            fetchData(search)
+            setTerm(search)
+            getFilteredData()
+
+        }
+
     }
 
 
 
-    const filteredImg = () => {
+    const getFilteredData = () => {
         return data.filter(img => img.tags.toLowerCase().indexOf(term) !== -1)
-
     }
 
 
 
     const loadMore = () => {
         setPage(page + 1)
+
     }
 
 
@@ -89,18 +95,22 @@ export const App2 = () => {
     return (
         <>
             <Searchbar onSubmit={onFormSubmit}  ></Searchbar>
-            <ImageGallery>
-                <ImageGalleryItem data={filteredImg()} />
-            </ImageGallery>
-            {isLoading ? (
-                <Loader></Loader>
+            {(data.length > 0) ? (
+                <div>
+                    <ImageGallery>
+                        <ImageGalleryItem data={data} />
+                    </ImageGallery>
+                    {isLoading ?
+                        (<Loader></Loader>)
+                        :
+                        (<Button loadMore={loadMore} >load more</Button >)
+                    }
+                </div>
+            ) :
+                <p> nic tu nie ma </p>
 
-            )
-                :
-                (
-                    <Button loadMore={loadMore} >load more</Button >
-                )
             }
+
 
         </>
     )
