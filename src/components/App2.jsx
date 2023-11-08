@@ -11,15 +11,13 @@ import { Loader } from './Loader/Loader'
 export const App2 = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    const [term, setTerm] = useState('');
+    const [term, setTerm] = useState('cat');
     const [isLoading, setIsLoading] = useState(false);
 
 
 
     const fetchData = async (search) => {
         setIsLoading(true)
-
-
         const API_KEY = '38312526-d0ea4ba6d4ac142df4a72a2b0'
         const URL = `https://pixabay.com/api/?q=${search || term}&page=${page}&key=` + API_KEY + "&image_type=photo&orientation=horizontal&per_page=12"
         await fetch(URL)
@@ -29,17 +27,13 @@ export const App2 = () => {
                 }
                 return response.json()
             })
-            .then((data) => {
-                let list = data.hits
-                if (search !== term) {
-                    setData([...data, ...list])
-                    setIsLoading(false)
+            .then((newData) => {
 
-                } else {
-                    setData([...list])
-                    setIsLoading(false)
+                let list = newData.hits
 
-                }
+                setData(...list)
+                setIsLoading(false)
+                console.log(list)
             }
             )
             .catch((error) => console.log(error))
@@ -69,14 +63,14 @@ export const App2 = () => {
 
         }
         form.reset();
-
     }
 
 
 
-    const filteredImg = () => {
-        return data.filter(img => img.tags.toLowerCase().indexOf(term) !== -1)
-    }
+    // const filteredImg = () => {
+    //     return data.filter(img => img.tags.toLowerCase().indexOf(term) !== -1)
+
+    // }
 
 
 
@@ -96,9 +90,8 @@ export const App2 = () => {
 
             <Searchbar onSubmit={onFormSubmit}  ></Searchbar>
             <ImageGallery>
-                <ImageGalleryItem obj={filteredImg()} />
+                <ImageGalleryItem data={data} />
             </ImageGallery>
-            <Modal obj={filteredImg()} />
             {isLoading ? (
                 <Loader></Loader>
 

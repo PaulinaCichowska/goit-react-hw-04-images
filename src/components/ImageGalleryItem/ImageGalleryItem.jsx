@@ -3,10 +3,10 @@ import css from './ImageGalleryItem.module.css'
 import PropTypes from 'prop-types';
 
 
-export const ImageGalleryItem = ({ obj }) => (
+export const ImageGalleryItem = ({ data }) => (
     <>
         {
-            obj.map((elem) => {
+            data.map((elem) => {
                 const id = elem.id
                 const link = `#${id}`
                 return <li className={css.listItem} key={elem.id}>
@@ -18,6 +18,6 @@ export const ImageGalleryItem = ({ obj }) => (
             })}
     </>
 )
-ImageGalleryItem.propTypes = {
-    obj: PropTypes.array,
-}
+// ImageGalleryItem.propTypes = {
+//     obj: PropTypes.,
+// }
