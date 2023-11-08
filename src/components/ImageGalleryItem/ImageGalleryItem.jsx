@@ -5,19 +5,14 @@ import PropTypes from 'prop-types';
 
 export const ImageGalleryItem = ({ data }) => (
     <>
-        {
-            data.map((elem) => {
-                const id = elem.id
-                const link = `#${id}`
-                return <li className={css.listItem} key={elem.id}>
-                    <a href={link} >
-                        <img src={elem.webformatURL} className={css.picture} alt={elem.tags} />
-                    </a>
-                </li>
+        {data.map((elem) => {
+            return <li className={css.listItem} key={elem.id}>
+                <img key={elem.id} src={elem.webformatURL} className={css.picture} alt={elem.tags} />
+            </li>
 
-            })}
+        })}
     </>
 )
-// ImageGalleryItem.propTypes = {
-//     obj: PropTypes.,
-// }
+ImageGalleryItem.propTypes = {
+    obj: PropTypes.array,
+}
