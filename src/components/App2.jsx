@@ -7,7 +7,6 @@ import { Modal } from "./Modal/Modal"
 
 import { Loader } from './Loader/Loader'
 
-import { Lightbox } from "react-modal-image";
 
 
 export const App2 = () => {
@@ -28,7 +27,6 @@ export const App2 = () => {
             const response = await fetch(URL);
             const json = await response.json();
             let newData = json.hits
-            console.log((search === term))
             if (search === term) {
                 setData([...data, ...newData])
 
@@ -91,9 +89,20 @@ export const App2 = () => {
         setPage(page + 1)
 
     }
+    const [url, setUrl] = useState("")
 
-    const showModal = () => {
+    const showModal = (e) => {
         setIsOpen((prev) => !prev);
+
+        const ID = e.target.id
+        // eslint-disable-next-line
+        const item = data.find(item => item.id == ID);
+        setUrl(item.largeImageURL)
+    }
+
+    const CloseModal = () => {
+        setIsOpen((prev) => !prev);
+
     }
 
 
@@ -103,9 +112,13 @@ export const App2 = () => {
             {(data.length > 0) ? (
                 <div>
                     <ImageGallery>
-                        <ImageGalleryItem data={data} onClick={() => setIsOpen(true)} />
-
+                        <ImageGalleryItem data={data} onClick={showModal} />
                     </ImageGallery>
+                    {
+                        isOpen && (
+                            <Modal src={url} onClose={CloseModal}>
+                            </Modal>)
+                    }
 
                     {isLoading ?
                         (<Loader></Loader>)

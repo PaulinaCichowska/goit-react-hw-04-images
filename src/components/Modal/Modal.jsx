@@ -5,12 +5,16 @@ import PropTypes from 'prop-types';
 //właściwie nie ma tu modala tylko css udający modala// 
 export const Modal = ({ src, onClose }) => {
     return (
-        <div className={css.modal}>
-            <span className={css.close} onClick={onClose}>
-                &times;
-            </span>
-            <img className="modal-content" src={src} alt="xd" />
-        </div>
+        <>
+
+            return <div className={css.modal}>
+                <span className={css.close} onClick={onClose}>
+                    &times;
+                </span>
+                <img className="modal-content" src={src} alt="xd" />
+            </div>
+        </>
+
     )
 }
 
