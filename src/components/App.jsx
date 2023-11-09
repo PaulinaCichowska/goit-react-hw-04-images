@@ -11,7 +11,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
 
-export const App2 = () => {
+export const App = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [term, setTerm] = useState('cat');
