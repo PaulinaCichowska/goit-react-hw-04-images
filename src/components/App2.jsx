@@ -4,8 +4,10 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
 import { Button } from "./Button/Button";
 import { Modal } from "./Modal/Modal"
-
 import { Loader } from './Loader/Loader'
+
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 
 
@@ -14,8 +16,9 @@ export const App2 = () => {
     const [page, setPage] = useState(1);
     const [term, setTerm] = useState('cat');
     const [isLoading, setIsLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false)
-
+    const [isOpen, setIsOpen] = useState(false);
+    const [url, setUrl] = useState("");
+    const [altImg, setAltImg] = useState("");
 
 
 
@@ -63,6 +66,8 @@ export const App2 = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
+
+
     const onFormSubmit = (e) => {
         const form = e.currentTarget;
         const search = e.target.search.value
@@ -77,19 +82,15 @@ export const App2 = () => {
 
     }
 
-
-
     const getFilteredData = () => {
         return data.filter(img => img.tags.toLowerCase().indexOf(term) !== -1)
     }
-
-
 
     const loadMore = () => {
         setPage(page + 1)
 
     }
-    const [url, setUrl] = useState("")
+
 
     const showModal = (e) => {
         setIsOpen((prev) => !prev);
@@ -97,6 +98,7 @@ export const App2 = () => {
         const ID = e.target.id
         // eslint-disable-next-line
         const item = data.find(item => item.id == ID);
+        setAltImg(item.tags);
         setUrl(item.largeImageURL)
     }
 
@@ -116,7 +118,7 @@ export const App2 = () => {
                     </ImageGallery>
                     {
                         isOpen && (
-                            <Modal src={url} onClose={CloseModal}>
+                            <Modal src={url} alt={altImg} onClose={CloseModal}>
                             </Modal>)
                     }
 
@@ -126,8 +128,13 @@ export const App2 = () => {
                         (<Button loadMore={loadMore} >load more</Button >)
                     }
                 </div>
-            ) :
-                <p> nic tu nie ma </p>
+            ) : (
+                Notify.warning('Im sorry but nothing was found', {
+                    timeout: 1000,
+                    showOnlyTheLastOne: true,
+                })
+
+            )
 
             }
 

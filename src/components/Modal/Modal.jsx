@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 //właściwie nie ma tu modala tylko css udający modala// 
-export const Modal = ({ src, onClose }) => {
+export const Modal = ({ src, onClose, alt }) => {
     return (
         <>
 
@@ -11,7 +11,8 @@ export const Modal = ({ src, onClose }) => {
                 <span className={css.close} onClick={onClose}>
                     &times;
                 </span>
-                <img className="modal-content" src={src} alt="xd" />
+                <div className={css.container}>
+                    <img className={css.img} src={src} alt={alt} /></div>
             </div>
         </>
 
@@ -20,4 +21,6 @@ export const Modal = ({ src, onClose }) => {
 
 Modal.propTypes = {
     obj: PropTypes.array,
+    alt: PropTypes.string,
+    src: PropTypes.string,
 }
