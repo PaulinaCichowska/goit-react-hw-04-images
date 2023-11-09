@@ -2,11 +2,12 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://paulinacichowska.github.io/goit-react-hw-03-image-finder/",
+  "homepage": "https://paulinacichowska.github.io/goit-react-hw-04-images/",
   "dependencies": {
-
     "components": "^0.1.0",
     "eslint-config-react-app": "^7.0.1",
+    "notiflix": "^3.2.6",
+    "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-loader-spinner": "^5.4.5",

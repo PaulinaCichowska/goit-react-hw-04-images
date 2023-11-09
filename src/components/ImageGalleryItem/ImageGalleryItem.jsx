@@ -1,23 +1,22 @@
 import css from './ImageGalleryItem.module.css'
 
+
 import PropTypes from 'prop-types';
 
 
-export const ImageGalleryItem = ({ obj }) => (
-    <>
-        {
-            obj.map((elem) => {
-                const id = elem.id
-                const link = `#${id}`
-                return <li className={css.listItem} key={elem.id}>
-                    <a href={link} >
-                        <img src={elem.webformatURL} className={css.picture} alt={elem.tags} />
-                    </a>
-                </li>
+export const ImageGalleryItem = ({ data, onClick }) => {
 
+    return (
+        <>
+            {data.map((elem) => {
+                return <li className={css.listItem} key={elem.id}>
+                    <img onClick={onClick} id={elem.id} key={elem.id} src={elem.webformatURL} className={css.picture} alt={elem.tags} />
+                </li>
             })}
-    </>
-)
+
+        </>)
+}
 ImageGalleryItem.propTypes = {
     obj: PropTypes.array,
+    onClick: PropTypes.func,
 }
