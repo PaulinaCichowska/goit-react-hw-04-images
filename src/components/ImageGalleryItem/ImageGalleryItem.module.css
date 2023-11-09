@@ -22,22 +22,21 @@
 }
 
 .listItem {
-    -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+    width: 200px;
+    height: 200px;
     padding: 5px;
     background: linear-gradient(grey, lightgrey);
-    max-height: 350px;
-    max-width: 250px;
     transition: transform 0.2s;
     cursor: pointer;
     margin: 10px;
+
 }
 
-.listItem:before {
+.listItem::after {
     content: '';
     position: absolute;
     opacity: 0.5;
-    width: 350px;
+    width: 400px;
     height: 70px;
     background: white;
     top: 0;
@@ -47,7 +46,7 @@
     transition: transform 0.5s;
 }
 
-.listItem:hover:before {
-    transform: translate(-100px, 400%) rotate(45deg);
+.listItem:hover:after {
+    transform: translate(-200px, 500%) rotate(45deg);
     transition: transform 0.5s;
 }

@@ -3,9 +3,11 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
 import { Button } from "./Button/Button";
-// import { Modal } from "./Modal/Modal"
+import { Modal } from "./Modal/Modal"
 
 import { Loader } from './Loader/Loader'
+
+import { Lightbox } from "react-modal-image";
 
 
 export const App2 = () => {
@@ -13,6 +15,8 @@ export const App2 = () => {
     const [page, setPage] = useState(1);
     const [term, setTerm] = useState('cat');
     const [isLoading, setIsLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
+
 
 
 
@@ -24,11 +28,10 @@ export const App2 = () => {
             const response = await fetch(URL);
             const json = await response.json();
             let newData = json.hits
-            // console.log(String(search).valueOf() === String(term).valueOf())
             console.log((search === term))
             if (search === term) {
                 setData([...data, ...newData])
-                console.log("1")
+
 
             } else {
                 setData([...newData])
@@ -89,7 +92,9 @@ export const App2 = () => {
 
     }
 
-
+    const showModal = () => {
+        setIsOpen((prev) => !prev);
+    }
 
 
     return (
@@ -98,8 +103,10 @@ export const App2 = () => {
             {(data.length > 0) ? (
                 <div>
                     <ImageGallery>
-                        <ImageGalleryItem data={data} />
+                        <ImageGalleryItem data={data} onClick={() => setIsOpen(true)} />
+
                     </ImageGallery>
+
                     {isLoading ?
                         (<Loader></Loader>)
                         :
