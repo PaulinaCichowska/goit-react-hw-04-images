@@ -5,11 +5,7 @@ import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
 import { Button } from "./Button/Button";
 import { Modal } from "./Modal/Modal"
 import { Loader } from './Loader/Loader'
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-
-
 
 export const App = () => {
     const [data, setData] = useState([]);
@@ -19,8 +15,6 @@ export const App = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [url, setUrl] = useState("");
     const [altImg, setAltImg] = useState("");
-
-
 
     const fetchData = async (search) => {
         setIsLoading(true)
@@ -48,9 +42,6 @@ export const App = () => {
     };
 
 
-
-
-
     useEffect(() => {
         fetchData(term);
 
@@ -65,8 +56,6 @@ export const App = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
-
-
 
     const onFormSubmit = (e) => {
         const form = e.currentTarget;
@@ -91,7 +80,6 @@ export const App = () => {
 
     }
 
-
     const showModal = (e) => {
         setIsOpen((prev) => !prev);
 
@@ -107,7 +95,6 @@ export const App = () => {
 
     }
 
-
     return (
         <>
             <Searchbar onSubmit={onFormSubmit}  ></Searchbar>
@@ -121,7 +108,6 @@ export const App = () => {
                             <Modal src={url} alt={altImg} onClose={CloseModal}>
                             </Modal>)
                     }
-
                     {isLoading ?
                         (<Loader></Loader>)
                         :
@@ -135,13 +121,6 @@ export const App = () => {
                 })
 
             )
-
-            }
-
-
-        </>
+            }   </>
     )
-
-
-
 };
